@@ -42,7 +42,7 @@ macro_rules! define_id {
             }
         }
 
-        #[cfg(feature = "postgres-array")]
+        #[cfg(feature = "postgres")]
         impl sea_orm::sea_query::value::with_array::NotU8 for $name {}
 
         #[cfg(feature = "serde")]

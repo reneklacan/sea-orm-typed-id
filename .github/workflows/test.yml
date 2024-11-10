@@ -1,0 +1,33 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    env:
+      CARGO_TERM_COLOR: always
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: "true"
+          cache-all-crates: "true"
+          cache-provider: "github"
+
+      - name: Test
+        run: |
+          cargo test
+          cargo test --features all
+          cargo test --features serde
+          cargo test --features postgres
+          cargo test --features utoipa
+          cargo test --features rustls
+
+      - name: Lint
+        run: cargo clippy --no-deps -- -D warnings
