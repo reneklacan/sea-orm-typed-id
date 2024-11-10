@@ -7,7 +7,7 @@ A Rust library that provides a macro for generating type-safe database ID types 
 
 ## Caveat
 
-You might actually not need this library, it's just a macro and you might be better off with just copying the code from [src/lib.rs](src/lib.rs) into your project.
+You might not actually need this library; it’s just a macro, and you might be better off simply copying the code from src/lib.rs into your project.
 
 ### Features
 
@@ -31,7 +31,7 @@ sea-orm-typed-id = { version = "0.1.0", features = ["all"] }
 ```rust
 use sea_orm_typed_id::define_id;
 
-define_id!(UserId);
+define_id!(CakeId);
 
 #[derive(Clone, Debug, PartialEq, Eq, DeriveEntityModel)]
 #[sea_orm(table_name = "cakes")]
