@@ -1,0 +1,24 @@
+[package]
+name = "sea-orm-typed-id"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rene Klacan <rene@klacan.sk>"]
+
+[lib]
+doctest = false
+
+[dependencies]
+sea-orm = { version = "^1.0" }
+serde = { version = "^1.0", features = ["derive"], optional = true }
+serde_json = { version = "^1.0", optional = true }
+utoipa = { version = "^5.0", optional = true }
+
+[features]
+# default = ["serde", "rustls", "postgres"]
+default = []
+all = ["serde", "rustls", "postgres", "postgres-array", "utoipa"]
+serde = ["dep:serde", "dep:serde_json", "sea-orm/with-json"]
+rustls = ["sea-orm/runtime-tokio-rustls"]
+postgres = ["sea-orm/sqlx-postgres"]
+postgres-array = ["sea-orm/postgres-array"]
+utoipa = ["dep:utoipa"]
