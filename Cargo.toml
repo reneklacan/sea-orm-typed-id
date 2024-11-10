@@ -3,6 +3,9 @@ name = "sea-orm-typed-id"
 version = "0.1.0"
 edition = "2021"
 authors = ["Rene Klacan <rene@klacan.sk>"]
+license = "MIT"
+description = "A Rust library that provides a macro for generating type-safe database ID types for SeaORM."
+repository = "https://github.com/reneklacan/sea-orm-typed-id"
 
 [lib]
 doctest = false
