@@ -24,7 +24,7 @@ jobs:
         run: |
           cargo test
           cargo test --features all
-          cargo test --features serde
+          cargo test --features postgres,utoipa
           cargo test --features postgres
           cargo test --features utoipa
           cargo test --features rustls

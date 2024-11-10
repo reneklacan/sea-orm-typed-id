@@ -12,7 +12,6 @@ You might not actually need this library; it’s just a macro, and you might be 
 ### Features
 
 - `all`: Enables all features
-- `serde`: Enables serde support for serialization/deserialization
 - `rustls`: Enables rustls TLS backend for SeaORM
 - `postgres`: Enables PostgreSQL array support
 - `utoipa`: Enables OpenAPI schema generation support
