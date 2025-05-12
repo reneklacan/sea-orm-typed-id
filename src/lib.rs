@@ -119,12 +119,6 @@ macro_rules! define_id_core {
             }
         }
 
-        impl sea_orm::sea_query::Nullable for $name {
-            fn null() -> sea_orm::Value {
-                i32::null()
-            }
-        }
-
         impl sea_orm::IntoActiveValue<$name> for $name {
             fn into_active_value(self) -> sea_orm::ActiveValue<$name> {
                 sea_orm::ActiveValue::Set(self)
