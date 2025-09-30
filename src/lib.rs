@@ -125,6 +125,12 @@ macro_rules! define_id_core {
             }
         }
 
+        impl From<&$name> for sea_orm::Value {
+            fn from(value: &$name) -> Self {
+                sea_orm::Value::from(*value)
+            }
+        }
+
         impl From<$name> for u64 {
             fn from(value: $name) -> Self {
                 if value.0 < 0 {
