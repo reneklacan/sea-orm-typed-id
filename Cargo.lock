@@ -1443,7 +1443,7 @@ dependencies = [
 
 [[package]]
 name = "sea-orm-typed-id"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "sea-orm",
  "serde",
