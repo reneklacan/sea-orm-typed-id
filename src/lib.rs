@@ -6,6 +6,7 @@ macro_rules! define_id {
         $crate::define_id_core! {$name}
         $crate::define_id_serde! {$name}
         $crate::define_id_postgres! {$name}
+        $crate::define_id_schemars! {$name}
     };
 }
 
@@ -17,6 +18,7 @@ macro_rules! define_id {
         $crate::define_id_core! {$name}
         $crate::define_id_serde! {$name}
         $crate::define_id_postgres! {$name}
+        $crate::define_id_schemars! {$name}
     };
 }
 
@@ -27,6 +29,7 @@ macro_rules! define_id {
         $crate::define_id_struct! {$name, utoipa::ToSchema}
         $crate::define_id_core! {$name}
         $crate::define_id_serde! {$name}
+        $crate::define_id_schemars! {$name}
     };
 }
 
@@ -37,6 +40,7 @@ macro_rules! define_id {
         $crate::define_id_struct! {$name}
         $crate::define_id_core! {$name}
         $crate::define_id_serde! {$name}
+        $crate::define_id_schemars! {$name}
     };
 }
 
@@ -98,6 +102,28 @@ macro_rules! define_id_serde {
         impl From<$name> for sea_orm::JsonValue {
             fn from(value: $name) -> Self {
                 sea_orm::JsonValue::Number(value.0.into())
+            }
+        }
+    };
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! define_id_schemars {
+    ($name:ident) => {
+        impl schemars::JsonSchema for $name {
+            fn schema_name() -> std::borrow::Cow<'static, str> {
+                format!("{}", stringify!($name)).into()
+            }
+
+            fn json_schema(_generator: &mut schemars::SchemaGenerator) -> schemars::Schema {
+                schemars::json_schema!({
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 0,
+                    "maximum": i32::MAX,
+                    "description": format!("A unique identifier for the {}", stringify!($name)),
+                })
             }
         }
     };
