@@ -109,6 +109,14 @@ macro_rules! define_id_serde {
 
 #[doc(hidden)]
 #[macro_export]
+#[cfg(not(feature = "schema"))]
+macro_rules! define_id_schemars {
+    ($name:ident) => {};
+}
+
+#[doc(hidden)]
+#[macro_export]
+#[cfg(feature = "schema")]
 macro_rules! define_id_schemars {
     ($name:ident) => {
         impl schemars::JsonSchema for $name {

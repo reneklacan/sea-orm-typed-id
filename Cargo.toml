@@ -19,12 +19,13 @@ sea-orm = { version = "^1.1", default-features = false, features = [
 ] }
 serde = { version = "^1.0", features = ["derive"] }
 serde_json = { version = "^1.0" }
-schemars = { version = "^1.0" }
+schemars = { version = "^1.0", optional = true }
 utoipa = { version = ">=4.0", optional = true }
 
 [features]
 default = []
-all = ["rustls", "postgres", "utoipa"]
+all = ["rustls", "postgres", "schema", "utoipa"]
 rustls = ["sea-orm/runtime-tokio-rustls"]
 postgres = ["sea-orm/postgres-array"]
+schema = ["dep:schemars"]
 utoipa = ["dep:utoipa"]

@@ -14,6 +14,7 @@ You might not actually need this library; it’s just a macro, and you might be 
 - `all`: Enables all features
 - `rustls`: Enables rustls TLS backend for SeaORM
 - `postgres`: Enables PostgreSQL array support
+- `schema`: Enables `schemars::JsonSchema` support
 - `utoipa`: Enables OpenAPI schema generation support
 
 ## Installation
