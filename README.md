@@ -23,7 +23,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-sea-orm-typed-id = { version = "0.2.0", features = ["all"] }
+sea-orm-typed-id = { version = "0.4.1", features = ["all"] }
 ```
 
 ## Usage
