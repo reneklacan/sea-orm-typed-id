@@ -1,29 +1,5 @@
 #[macro_export]
-#[cfg(all(feature = "postgres", feature = "utoipa"))]
-macro_rules! define_id {
-    ($name:ident) => {
-        $crate::define_id_struct! {$name, utoipa::ToSchema}
-        $crate::define_id_core! {$name}
-        $crate::define_id_serde! {$name}
-        $crate::define_id_postgres! {$name}
-        $crate::define_id_schemars! {$name}
-    };
-}
-
-#[macro_export]
-#[cfg(all(feature = "postgres", not(feature = "utoipa")))]
-macro_rules! define_id {
-    ($name:ident) => {
-        $crate::define_id_struct! {$name}
-        $crate::define_id_core! {$name}
-        $crate::define_id_serde! {$name}
-        $crate::define_id_postgres! {$name}
-        $crate::define_id_schemars! {$name}
-    };
-}
-
-#[macro_export]
-#[cfg(all(feature = "utoipa", not(feature = "postgres")))]
+#[cfg(feature = "utoipa")]
 macro_rules! define_id {
     ($name:ident) => {
         $crate::define_id_struct! {$name, utoipa::ToSchema}
@@ -34,7 +10,7 @@ macro_rules! define_id {
 }
 
 #[macro_export]
-#[cfg(all(not(feature = "postgres"), not(feature = "utoipa")))]
+#[cfg(not(feature = "utoipa"))]
 macro_rules! define_id {
     ($name:ident) => {
         $crate::define_id_struct! {$name}
@@ -89,14 +65,6 @@ macro_rules! define_id_struct {
 
 #[doc(hidden)]
 #[macro_export]
-macro_rules! define_id_postgres {
-    ($name:ident) => {
-        impl sea_orm::sea_query::value::with_array::NotU8 for $name {}
-    };
-}
-
-#[doc(hidden)]
-#[macro_export]
 macro_rules! define_id_serde {
     ($name:ident) => {
         impl From<$name> for sea_orm::JsonValue {
@@ -144,18 +112,6 @@ macro_rules! define_id_core {
         impl std::fmt::Display for $name {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 write!(f, "{}", self.0)
-            }
-        }
-
-        impl sea_orm::TryFromU64 for $name {
-            fn try_from_u64(n: u64) -> Result<Self, sea_orm::DbErr> {
-                Ok($name(i32::try_from_u64(n)?))
-            }
-        }
-
-        impl sea_orm::IntoActiveValue<$name> for $name {
-            fn into_active_value(self) -> sea_orm::ActiveValue<$name> {
-                sea_orm::ActiveValue::Set(self)
             }
         }
 
