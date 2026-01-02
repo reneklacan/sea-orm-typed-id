@@ -158,8 +158,6 @@ macro_rules! define_id_core {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-
     #[test]
     fn it_works() {
         define_id!(TestId);
