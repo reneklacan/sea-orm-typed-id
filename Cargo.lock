@@ -1423,7 +1423,7 @@ dependencies = [
 
 [[package]]
 name = "sea-orm-typed-id"
-version = "0.5.0"
+version = "0.6.0"
 dependencies = [
  "schemars",
  "sea-orm",
