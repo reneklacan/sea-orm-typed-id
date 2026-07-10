@@ -258,6 +258,10 @@ mod tests {
         assert_eq!(u64::from(id), value as u64);
         assert_eq!(id.to_string(), value.to_string());
         assert_eq!(serde_json::to_value(id).unwrap(), serde_json::json!(value));
+        assert_eq!(
+            serde_json::from_value::<I64Id>(serde_json::json!(value)).unwrap(),
+            id
+        );
         assert_eq!(sea_orm::JsonValue::from(id), serde_json::json!(value));
     }
 
