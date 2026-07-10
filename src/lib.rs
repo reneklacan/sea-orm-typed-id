@@ -281,6 +281,12 @@ mod tests {
     }
 
     #[test]
+    #[should_panic(expected = "Negative ID. This should not happen.")]
+    fn i64_ids_reject_negative_u64_conversion() {
+        let _ = u64::from(I64Id::from(-1));
+    }
+
+    #[test]
     fn legacy_helper_macros_still_generate_i32_ids() {
         let id = LegacyHelperId::from(42);
 
