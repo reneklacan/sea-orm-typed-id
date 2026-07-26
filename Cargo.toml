@@ -1,6 +1,6 @@
 [package]
 name = "sea-orm-typed-id"
-version = "0.6.0"
+version = "0.6.1"
 edition = "2021"
 authors = ["Rene Klacan <rene@klacan.sk>"]
 license = "MIT"
@@ -13,6 +13,7 @@ doctest = false
 [dependencies]
 sea-orm = { version = "2.0.0-rc", default-features = false, features = [
   "macros",
+  "postgres-array",
   "with-json",
 ] }
 serde = { version = "^1.0", features = ["derive"] }
