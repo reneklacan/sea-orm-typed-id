@@ -70,6 +70,7 @@ macro_rules! define_id_struct {
             serde::Serialize,
             serde::Deserialize
         )]
+        #[sea_orm(try_getable_array)]
         #[repr(transparent)]
         pub struct $name($type);
     };
@@ -94,6 +95,7 @@ macro_rules! define_id_struct {
             serde::Deserialize,
             $($trait),+
         )]
+        #[sea_orm(try_getable_array)]
         #[repr(transparent)]
         pub struct $name($type);
     };
@@ -226,6 +228,15 @@ mod tests {
     define_id_core!(LegacyHelperId);
     define_id_serde!(LegacyHelperId);
     define_id_schemars!(LegacyHelperId);
+
+    fn assert_try_getable_array<T: sea_orm::TryGetableArray>() {}
+
+    #[test]
+    fn ids_support_postgres_arrays() {
+        assert_try_getable_array::<DefaultI32Id>();
+        assert_try_getable_array::<ExplicitI32Id>();
+        assert_try_getable_array::<I64Id>();
+    }
 
     #[test]
     fn default_and_explicit_i32_ids_use_integer_values() {
